@@ -1,0 +1,11 @@
+.page-wrapper{display: block;}
+.disp-block{display: block;}
+td, th{font-size: 14px;}
+
+#title {
+    width: 520px;
+    line-height: 2.5;
+    height: 2.5em; 
+    white-space: normal;
+}
+.action a{margin-right: 5px;;}

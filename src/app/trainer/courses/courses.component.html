@@ -1,0 +1,73 @@
+<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+   
+    <app-header></app-header>
+    <div class="page-wrapper">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-7 align-self-center">
+                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Table Name</h4> </div>
+                <div class="col-5 align-self-center">
+                    <div class="customize-input float-right">
+                        <a [routerLink]="['add']" routerLinkActive="router-link-active"  class="btn waves-effect waves-light btn-primary">Add Courses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table datatable class="table table-striped datatable table-bordered display no-wrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Lession And Section</th>
+                                            <th>Enrolled student</th>
+                                            <th>Status</th>
+                                            <th>Price</th>
+                                            <th class="no-sort">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let course of courses; let i = index">
+                                            <td>{{i + 1}}</td>
+                                            <td id="title">{{course.title | titlecase}}</td>
+                                            <td>{{course.cat_parent_name | titlecase}}</td>
+                                            <td>
+                                                <span class="disp-block">Total section: {{course.section.section_count}}</span>
+                                                <span class="disp-block">Total lesson: {{course.lesson.lesson_count}}</span>
+                                            </td>
+                                            <td>
+                                                <span class="disp-block">Total enrolment: {{course.enroll.enroll_count}}</span>
+                                            </td>
+                                            <td>{{course.status | titlecase}}</td>
+                                            <td> &#x20b9; {{course.price}}</td>
+                                            <td class="action">
+                                                <a [routerLink]="['edit', course.id]" routerLinkActive="router-link-active" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="##" class="text-danger" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<script>
+    $(document).ready( function () {
+    $('.datatable').DataTable();
+} );
+</script>
