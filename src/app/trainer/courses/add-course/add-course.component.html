@@ -8,88 +8,117 @@
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="datatable.html" class="text-muted">Datatable Name</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Form Name</li>
+                                    <li class="breadcrumb-item"><a [routerLink]="['/trainer/dashboard']" class="text-muted">Home</a></li>
+                                    <li class="breadcrumb-item"><a [routerLink]="['/trainer/course/']" class="text-muted">Courses</a></li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Add Courses</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
-            </div>
+			</div>
+
+			<!-- <div *ngFor="let item of cat">
+				---------------------------------------
+				{{item.name}}
+				---------------------------------------
+				<div *ngFor="let sub of item.parent_list">
+					{{sub.name}}
+				</div>
+				----------------------------------
+			</div> -->
+
+
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Add Course</h4>
-                                <form class="mt-4">
+                                <form class="mt-4" (ngSubmit)="create($event)" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <label class="text-dark" for="lname">Course Title<small class="required">*</small></label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="title">
                                             </div>
                                             <div class="form-group">
                                                 <label class="text-dark" for="fname">Short Description</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="short_desc">
                                             </div>
                                             <div class="form-group">
-                                                <label class="text-dark" for="lname">Category<small class="required">*</small></label>
-                                                <select class="js-example-placeholder-single js-states form-control">
-												  <option>Development</option>
-												  <option>Data Science</option>
-												  <option>Mobile Apps</option>
+												
+												<label class="text-dark" for="lname">Category<small class="required">*</small></label>
+												
+												<select 
+													class="js-example-placeholder-single js-states form-control"
+													id="category"
+													>	
+														<option disabled="disabled" selected="selected" value="0">Select Category</option>
+														<optgroup *ngFor='let option of cat' value="option.id" label="{{option.name}}">
+															<option 
+																class='sub_cat' 
+																*ngFor="let sub of option.parent_list"
+																[value]="sub.id"
+																>
+																{{sub.name}}
+															</option>
+													</optgroup>
 												</select>
                                             </div>
                                             <div class="form-group">
                                                 <label class="text-dark" for="lname">Level</label>
-                                                <select class="js-example-placeholder-single js-states form-control">
-												  <option>Beginner</option>
-												  <option>Intermediate</option>
-												  <option>Advance</option>
+                                                <select class="js-example-placeholder-single js-states form-control" id="level">
+													<option disabled="disabled" selected="selected" value="0">Select Level</option>
+													<option value="Beginner">Beginner</option>
+													<option value="Intermediate">Intermediate</option>
+													<option value="Advance">Advance</option>
 												</select>
                                             </div>
                                             <div class="form-group">
-                                                <label class="text-dark" for="lname">Language made in</label>
-                                                <select class="js-example-placeholder-single js-states form-control">
-												  <option>English</option>
-												  <option>Hindi</option>
+												<label class="text-dark" for="lname">Language made in</label>
+                                                <select class="js-example-placeholder-single js-states form-control" id="language">
+													<option disabled="disabled" selected="selected" value="0">Select Language </option>
+													<option value="English">English</option>
+													<option value="Hindi">Hindi</option>
+												</select>
+                                            </div>	
+                                            <div class="form-group">
+												<label class="text-dark" for="">Course overview provider</label>
+                                                <select class="js-example-placeholder-single js-states form-control" id="course_provider">
+													<option disabled="disabled" selected="selected" value="0">Select Language </option>
+													<option value="Youtube">Youtube</option>
+												  	<option value="Viemo">Viemo</option>
+												  	<option value="HTML5">HTML5</option>
 												</select>
                                             </div>
                                             <div class="form-group">
-                                                <label class="text-dark" for="lname">Course overview provider</label>
-                                                <select class="js-example-placeholder-single js-states form-control">
-												  <option>Youtube</option>
-												  <option>Viemo</option>
-												  <option>HTML5</option>
-												</select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-dark" for="lname">Course overview url</label>
-                                                <input type="text" class="form-control" >
-                                            </div>
-	                                    	<div class="custom-control custom-checkbox">
-			                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-			                                    <label class="custom-control-label" for="customCheck2">Check if this course is top course</label>
-			                                </div>
+                                                <label class="text-dark" for="course_url">Course overview url</label>
+                                                <input type="text" class="form-control" id="course_url">
+											</div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                         	<div class="row">
                                         		<div class="col-md-12">
 		                                            <div class="form-group">
 		                                                <label class="text-dark" for="lname">Description</label>
-		                                                <textarea name="editor1"></textarea>
+		                                                <ckeditor id="desc" (blur)="ckeditor_data($event)">npm</ckeditor>
 		                                            </div>
 		                                        </div>
 		                                    	<div class="col-md-12">
 		                                    		<label class="text-dark">Select Course Thumbnail</label>
-		                                    		<div class="card-preview">
-														<div id="dvPreview">
-															<i class="far fa-images"></i>
-														</div>
-														<label><input id="fileupload" type="file" multiple="multiple" /></label>
-														<span>Click to Select</span> 
+		                                    		<div class="form-group">
+														<input type="file" name="image" id="thumbnail" (change)="fileProgress($event)" />
+													</div>
+													<div *ngIf="fileUploadProgress">
+														Upload progress: {{ fileUploadProgress }}
+													</div>
+													<div class="image-preview mb-3" *ngIf="previewUrl">
+														<img [src]="previewUrl" height="300" />                 
+													</div>
+										 
+													<div class="mb-3" *ngIf="uploadedFilePath">
+														{{uploadedFilePath}}
 													</div>
 												</div>
 											</div>
@@ -98,7 +127,7 @@
                                     <div class="row mt-4">
 	                                    <div class="col-md-12">
 			                                 <button type="Submit" class="btn waves-effect waves-light btn-primary">Submit</button>
-			                                 <button type="Submit" class="btn waves-effect waves-light btn-danger">Clear</button>
+											 <!-- <button type="clear" class="btn waves-effect waves-light btn-danger">Clear</button> -->
 	                                	</div>
 	                                </div>
                                 </form>
@@ -110,9 +139,7 @@
         </div>
     </div>
 
-    <!-- <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script> -->
 	<script>
-		CKEDITOR.replace( 'editor1' );
 		$(function () {
 	    $("#fileupload").change(function () {
 	        if (typeof (FileReader) != "undefined") {

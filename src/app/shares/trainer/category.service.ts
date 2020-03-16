@@ -56,6 +56,17 @@ export class CategoryService {
   }
     
   
+  
+  show_all_categories()
+  {
+    return this.http.get<any>(this.serverUrl + 'api/trainer/category/show')
+    .pipe(
+      catchError(this.handleError)
+      );
+      
+  }
+    
+  
   get_category(category_id)
   {
     // console.log(category_id);

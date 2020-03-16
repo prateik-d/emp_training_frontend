@@ -25,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { TrainerModule } from './trainer/trainer.module';
 import { InvalidComponent } from './invalid/invalid.component';
-
+import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
@@ -45,10 +45,11 @@ import { InvalidComponent } from './invalid/invalid.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DataTablesModule,
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    CKEditorModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
