@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
     var log_diff = ((currentDate.getTime() - converted_loginTime.getTime())/60000);
 
-    if(log_diff > 60)
+    if(log_diff > 60)             // 60 = 1 min
     {
       this.logout();
     }

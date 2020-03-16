@@ -7,11 +7,14 @@ import { DatatablesComponent } from './datatables/datatables.component';
 import { CategoryComponent } from './category/category.component';
 import { EditCategoryComponent } from './category/edit-category/edit-category.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { CoursesComponent } from './courses/courses.component';
+import { AddCourseComponent } from './courses/add-course/add-course.component';
+import { EditCourseComponent } from './courses/edit-course/edit-course.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, HeaderComponent, DashboardComponent, DatatablesComponent, CategoryComponent, EditCategoryComponent, AddCategoryComponent],
+  declarations: [HomeComponent, HeaderComponent, DashboardComponent, DatatablesComponent, CategoryComponent, EditCategoryComponent, AddCategoryComponent, CoursesComponent, AddCourseComponent, EditCourseComponent],
   imports: [
     CommonModule
   ]

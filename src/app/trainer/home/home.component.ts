@@ -30,8 +30,28 @@ export class HomeComponent implements OnInit {
       password: ['', Validators.required]
     });
 
+    if(localStorage.getItem('currentUser'))
+    {
+      let user = localStorage.getItem('currentUser');
+      var json = JSON.parse(user);
+
+      if(json["user"] != 'trainer')
+      {
+        localStorage.removeItem('currentUser');
+        
+      }
+      else
+      {
+        this.router.navigate(['/trainer/dashboard']);
+      }
+    }
+    else
+    {
+      localStorage.removeItem('currentUser');
+    }
+
     // console.log(localStorage.getItem('currentUser'));
-    localStorage.removeItem('currentUser');
+    // localStorage.removeItem('currentUser');
     // this.loginService.logout();
   }
 
