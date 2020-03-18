@@ -24,6 +24,9 @@ export class AddCourseComponent implements OnInit
   uploadedFilePath: string = null;
   cke_data : any;
   courseForm: FormGroup;
+  course_provider_value:any;
+  video_uploader;
+  course_url;
 
 
   constructor(
@@ -47,6 +50,7 @@ export class AddCourseComponent implements OnInit
       language: [''],
       course_provider: [''],
       course_url: [''],
+      video_upload: [''],
       desc: [''],
       thumbnail: ['']
     });
@@ -61,6 +65,9 @@ export class AddCourseComponent implements OnInit
     });
     // localStorage.removeItem('desc');
 
+    this.video_uploader = '0';
+    this.course_url = '1';
+
 
   }
 
@@ -73,6 +80,34 @@ export class AddCourseComponent implements OnInit
       const file = fileInput.target.files[0];
       // console.log(file);
       this.courseForm.get('thumbnail').setValue(file);
+    }
+
+  }
+
+  video_upload(fileInput: any) {
+    
+    if (fileInput.target.files.length > 0) {
+
+      
+
+      const file = fileInput.target.files[0];
+      console.log(file);
+      console.log(file.size);
+      console.log(file.type);
+
+      if(!(file.type.includes('video')))
+      {
+        console.log('not video');
+      }
+      else if(file.size > 10000000)
+      {
+        console.log('file is too large');
+      }
+      else
+      {
+        this.courseForm.get('video_upload').setValue(file);
+      }
+
     }
 
   }
@@ -95,68 +130,107 @@ export class AddCourseComponent implements OnInit
   {
     var title = ((document.getElementById("title") as HTMLInputElement).value);
     var short_desc = ((document.getElementById("short_desc") as HTMLInputElement).value);
-    var category = ((document.getElementById("category") as HTMLInputElement).value);
+    var sub_category_id = ((document.getElementById("sub_category_id") as HTMLInputElement).value);
     var level = ((document.getElementById("level") as HTMLInputElement).value);
     var language = ((document.getElementById("language") as HTMLInputElement).value);
     var course_provider = ((document.getElementById("course_provider") as HTMLInputElement).value);
-    var course_url = ((document.getElementById("course_url") as HTMLInputElement).value);
     let desc = localStorage.getItem('desc');
+    var outcomes = ((document.getElementById("outcomes") as HTMLInputElement).value);
+    var requirements = ((document.getElementById("requirements") as HTMLInputElement).value);
+    
+    const formData = new FormData();
 
     
     // console.log(title);
     // console.log(short_desc);
-    // console.log(category);
+    // console.log(sub_category_id);
     // console.log(level);
     // console.log(language);
     // console.log(course_provider);
     // console.log(course_url);
     // console.log(desc);
-
-    if(title === '')
+    // return;
+    // if(title === '')
+    // {
+      //   console.log('no title')
+      // }
+      // else if(short_desc === '')
+      // {
+        //   console.log('no short desc')
+        // }
+        // else if(category === '0')
+        // {
+          //   console.log('no category')
+    // }
+    // else if(level === '0')
+    // {
+      //   console.log('no level')
+      // }
+      // else if(language === '0')
+      // {
+        //   console.log('no language')
+        // }
+        // else if(course_provider === '0')
+        // {
+          //   console.log('no course provider')
+          // }
+          // else if(course_url === '')
+          // {
+            //   console.log('no course url')
+            // }
+            // else if(desc === null)
+            // {
+              //   console.log('no desc')
+              // }
+              
+              formData.append('title', title);
+              formData.append('outcomes', outcomes);
+              formData.append('requirements', requirements);
+              formData.append('short_desc', short_desc);
+              formData.append('sub_category_id', sub_category_id);
+              formData.append('level', level);
+              formData.append('language_made_in', language);
+              formData.append('course_provider', course_provider);
+              formData.append('desc', desc);
+              formData.append('thumbnail', this.courseForm.get('thumbnail').value);
+              
+    if(this.course_url === '1' )
     {
-      console.log('no title')
+      var course_url = ((document.getElementById("course_url") as HTMLInputElement).value);
+      formData.append('course_url', course_url);
     }
-    else if(short_desc === '')
+    else if(this.video_uploader === '1')
     {
-      console.log('no short desc')
+      var video_upload = ((document.getElementById("video_upload") as HTMLInputElement).value);
+      formData.append('video_upload',  this.courseForm.get('video_upload').value);
     }
-    else if(category === '0')
-    {
-      console.log('no category')
-    }
-    else if(level === '0')
-    {
-      console.log('no level')
-    }
-    else if(language === '0')
-    {
-      console.log('no language')
-    }
-    else if(course_provider === '0')
-    {
-      console.log('no course provider')
-    }
-    else if(course_url === '')
-    {
-      console.log('no course url')
-    }
-    else if(desc === null)
-    {
-      console.log('no desc')
-    }
-
-
+    
+    
+    this.courseService.create(formData).subscribe((data) => {
+      
+      console.log(data);
+      
+      
+    });
 
   }
 
   ckeditor_data(event)
   {
-    // console.log( event.editor.getData() );
     this.cke_data = event.editor.getData();
     // console.log(this.cke_data);
 
     localStorage.setItem('desc', this.cke_data);
+  }
+  
+  course_provider(event)
+  {
+    // console.log(event);
+    this.course_provider_value = event.target.value;
+    console.log(this.course_provider_value);
 
+    this.course_url = '0';
+    this.video_uploader = '1';
 
   }
 }

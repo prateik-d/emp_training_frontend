@@ -37,13 +37,13 @@
                                         <tr *ngFor="let course of courses; let i = index">
                                             <td>{{i + 1}}</td>
                                             <td id="title">{{course.title | titlecase}}</td>
-                                            <td>{{course.cat_parent_name | titlecase}}</td>
+                                            <td>{{course.category | titlecase}}</td>
                                             <td>
-                                                <span class="disp-block">Total section: {{course.section.section_count}}</span>
-                                                <span class="disp-block">Total lesson: {{course.lesson.lesson_count}}</span>
+                                                <span class="disp-block">Total section: {{course.section_count}}</span>
+                                                <span class="disp-block">Total lesson: {{course.lesson_count}}</span>
                                             </td>
                                             <td>
-                                                <span class="disp-block">Total enrolment: {{course.enroll.enroll_count}}</span>
+                                                <span class="disp-block">Total enrolment: {{course.enroll_count}}</span>
                                             </td>
                                             <td>{{course.status | titlecase}}</td>
                                             <td> &#x20b9; {{course.price}}</td>
