@@ -30,26 +30,24 @@
 
 
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Add Course</h4>
-                                <form class="mt-4" (ngSubmit)="create($event)" method="post" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <label class="text-dark" for="lname">Course Title<small class="required">*</small></label>
-                                                <input type="text" class="form-control" id="title">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-dark" for="fname">Short Description</label>
-                                                <input type="text" class="form-control" id="short_desc">
-                                            </div>
-                                            <div class="form-group">
-												
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-12">
+								<form (ngSubmit)="create($event)" method="post" enctype="multipart/form-data">
+									<h3 class="form-title">Basic</h3>
+									<div class="row mb-4">
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="text-dark" for="lname">Course Title<small class="required">*</small></label>
+												<input type="text" class="form-control" id="title">
+											</div>
+											<div class="form-group">
+												<label class="text-dark" for="fname">Short Description</label>
+												<input type="text" class="form-control" id="short_desc">
+											</div>
+											<div class="form-group">	
 												<label class="text-dark" for="lname">Category<small class="required">*</small></label>
-												
 												<select 
 													class="js-example-placeholder-single js-states form-control"
 													id="sub_category_id"
@@ -65,116 +63,106 @@
 															</option>
 													</optgroup>
 												</select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="text-dark" for="lname">Level</label>
-                                                <select class="js-example-placeholder-single js-states form-control" id="level">
+											</div>
+											<input type="hidden" id="requirements" value="[]"/>
+											<div class="form-group">
+												<label class="text-dark" for="lname">Language made in</label>
+												<select class="js-example-placeholder-single js-states form-control" id="language">
+													<option disabled="disabled" selected="selected" value="0">Select Language </option>
+													<option value="English">English</option>
+													<option value="Hindi">Hindi</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="text-dark" for="lname">Level</label>
+												<select class="js-example-placeholder-single js-states form-control" id="level">
 													<option disabled="disabled" selected="selected" value="0">Select Level</option>
 													<option value="Beginner">Beginner</option>
 													<option value="Intermediate">Intermediate</option>
 													<option value="Advance">Advance</option>
 												</select>
 											</div>
-
-											<input type="hidden" id="outcomes" value="[]"/>
-											<input type="hidden" id="requirements" value="[]"/>
-
-                                            <div class="form-group">
-												<label class="text-dark" for="lname">Language made in</label>
-                                                <select class="js-example-placeholder-single js-states form-control" id="language">
-													<option disabled="disabled" selected="selected" value="0">Select Language </option>
-													<option value="English">English</option>
-													<option value="Hindi">Hindi</option>
-												</select>
-                                            </div>	
-                                            <div class="form-group">
-												<label class="text-dark" for="">Course overview provider</label>
-                                                <select class="js-example-placeholder-single js-states form-control" id="course_provider" (change)="course_provider($event)">
-													<option disabled="disabled" selected="selected" value="0">Select Language </option>
-													<option value="Youtube">Youtube</option>
-												  	<option value="Viemo">Viemo</option>
-												  	<option value="HTML5">HTML5</option>
-												  	<option value="video_upload">Video Upload</option>
-												</select>
-                                            </div>
-                                            <div class="form-group" *ngIf="course_url === '1'">
-                                                <label class="text-dark" for="course_url">Course overview url</label>
-                                                <input type="text" class="form-control" id="course_url">
-											</div>
-                                            <div class="form-group" *ngIf="video_uploader === '1'">
-                                                <label class="text-dark" for="video_upload">Upload video</label><br>
-                                                <input type="file" class="" id="video_upload" (change)="video_upload($event)" >
-											</div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                        	<div class="row">
-                                        		<div class="col-md-12">
-		                                            <div class="form-group">
-		                                                <label class="text-dark" for="lname">Description</label>
-		                                                <ckeditor id="desc" (blur)="ckeditor_data($event)">npm</ckeditor>
-		                                            </div>
-		                                        </div>
-		                                    	<div class="col-md-12">
-		                                    		<label class="text-dark">Select Course Thumbnail</label>
-		                                    		<div class="form-group">
-														<input type="file" name="image" id="thumbnail" (change)="fileProgress($event)" />
-													</div>
-													<div *ngIf="fileUploadProgress">
-														Upload progress: {{ fileUploadProgress }}
-													</div>
-													<div class="image-preview mb-3" *ngIf="previewUrl">
-														<img [src]="previewUrl" height="300" />                 
-													</div>
-										 
-													<div class="mb-3" *ngIf="uploadedFilePath">
-														{{uploadedFilePath}}
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="text-dark" for="lname">Description</label>
+														<ckeditor id="desc" (blur)="ckeditor_data($event)">npm</ckeditor>
 													</div>
 												</div>
 											</div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-4">
-	                                    <div class="col-md-12">
-			                                 <button type="Submit" class="btn waves-effect waves-light btn-primary">Submit</button>
-											 <!-- <button type="clear" class="btn waves-effect waves-light btn-danger">Clear</button> -->
-	                                	</div>
-	                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+										</div>
+									</div>
+									<h3 class="form-title">Requirments</h3>
+									<div class="row mb-4">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="text-dark" for="lname">Requirments</label>
+												<div class="row">
+													<div class="col-md-6">
+														<input type="text" class="form-control" id="title">
+													</div>
+													<div class="col-md-6">
+														<button class="btn waves-effect waves-light btn-primary">Add</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<h3 class="form-title">Media</h3>
+									<div class="row">
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="text-dark" for="">Course overview provider</label>
+												<select class="js-example-placeholder-single js-states form-control" id="course_provider" (change)="course_provider($event)">
+													<option disabled="disabled" selected="selected" value="0">Select Language </option>
+													<option value="Youtube">Youtube</option>
+													<option value="Viemo">Viemo</option>
+													<option value="HTML5">HTML5</option>
+													<option value="video_upload">Video Upload</option>
+												</select>
+											</div>
+											<input type="hidden" id="outcomes" value="[]"/>
+											<div class="form-group" *ngIf="course_url === '1'">
+												<label class="text-dark" for="course_url">Course overview url</label>
+												<input type="text" class="form-control" id="course_url">
+											</div>
+											<div class="form-group" *ngIf="video_uploader === '1'">
+												<label class="text-dark" for="video_upload">Upload video</label><br>
+												<input type="file" class="" id="video_upload" (change)="video_upload($event)" >
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<label class="text-dark">Select Course Thumbnail</label>
+											<div class="form-group browse-image">
+												<label>
+													<input type="file" name="image" id="thumbnail" (change)="fileProgress($event)" />
+													<span>Browse Image</span>
+												</label>
+											<div *ngIf="fileUploadProgress">
+												Upload progress: {{ fileUploadProgress }}
+											</div>
+											<div class="image-preview " *ngIf="previewUrl">
+												<img [src]="previewUrl" />                 
+											</div>
+								
+											<div *ngIf="uploadedFilePath">
+												{{uploadedFilePath}}
+											</div></div>
+											
+										</div>
+									</div>
+									<div class="row mt-4">
+										<div class="col-md-12">
+											<button type="Submit" class="btn waves-effect waves-light btn-primary">Submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
         </div>
     </div>
-
-	<script>
-		$(function () {
-	    $("#fileupload").change(function () {
-	        if (typeof (FileReader) != "undefined") {
-	            var dvPreview = $("#dvPreview");
-	            dvPreview.html("");
-	            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-	            $($(this)[0].files).each(function () {
-	                var file = $(this);
-	                if (regex.test(file[0].name.toLowerCase())) {
-	                    var reader = new FileReader();
-	                    reader.onload = function (e) {
-	                        var img = $("<img />");
-	                        img.attr("style", "width: 100%");
-	                        img.attr("src", e.target.result);
-	                        dvPreview.append(img);
-	                    }
-	                    reader.readAsDataURL(file[0]);
-	                } else {
-	                    alert(file[0].name + " is not a valid image file.");
-	                    dvPreview.html("");
-	                    return false;
-	                }
-	            });
-	        } else {
-	            alert("This browser does not support HTML5 FileReader.");
-	        }
-	    });
-	});
-	</script>
