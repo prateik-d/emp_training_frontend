@@ -45,10 +45,15 @@
 						<div class="row">
 							<div class="col-12">
 								<form (ngSubmit)="create($event)" method="post" enctype="multipart/form-data">
-									<button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#section">Add Section</button>
-									<button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#lesson">Add Lesson</button>
-									<h3 class="form-title">Basic</h3> 
-
+									<div class="row form-title">
+										<div class="col-md-4 align-self-center">
+											<h3 class="mb-0">Basic</h3> 
+										</div>
+										<div class="col-md-8 text-right">
+											<button type="button" class="btn btn-info mr-3" data-toggle="modal" data-target="#section">Add Section</button>
+											<button type="button" class="btn btn-info" data-toggle="modal" data-target="#lesson">Add Lesson</button>
+										</div>
+									</div>
 									<div class="row mb-4">
 										<div class="col-md-6 col-sm-12">
 											<div class="form-group">
