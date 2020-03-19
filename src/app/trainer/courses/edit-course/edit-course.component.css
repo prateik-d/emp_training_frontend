@@ -7,9 +7,13 @@
 .card-preview i{color: #ddd;font-size: 80px;margin: 50px auto;}
 .card-preview span{display: block;padding: 10px;background: #f8f8f8;}
 .card-preview #dvPreview{min-height: 200px}
-.list-group div{padding: 10px 15px;border: 1px solid #ccc;border-radius: 4px;margin-bottom: 15px;}
-.list-group div a{float: right;font-size: 13px;margin-left: 15px;opacity: 0;color: #333;position: relative;right: -10px;transition: 0.2s;}
-.list-group div a:nth-child(1){margin-right:0}
-.list-group div:hover a{opacity: 1;right:0;transition: 0.2s}
+.list-group .tab-section{padding: 10px 15px;border: 1px solid #ccc;border-radius: 4px;margin-bottom: 15px;}
+.list-group .tab-section a{float: right;font-size: 13px;margin-left: 15px;opacity: 0;color: #333;position: relative;right: -10px;transition: 0.2s;}
+.section-title a{margin-right: 15px;}
+.section-title a:nth-last-child(1),.list-group .tab-section a:nth-child(1){margin-right:0}
+.list-group .tab-section:hover a{opacity: 1;right:0;transition: 0.2s}
 .list-group span{display: inline-block;}
-.list-group div:nth-last-child(1){margin: 0;}
+.list-group .tab-section:nth-last-child(1){margin: 0;}
+.section-title h3{color: #5f76e8;font-weight: 500;}
+.section-title a{color: #81e85f;}
+.section-title a .fa-trash-alt{color: #ff4f70;}
