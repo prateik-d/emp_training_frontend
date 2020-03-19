@@ -25,8 +25,9 @@ export class AddCourseComponent implements OnInit
   cke_data : any;
   courseForm: FormGroup;
   course_provider_value:any;
-  video_uploader;
-  course_url;
+  video_uploader:any;
+  course_url:any;
+  trainer_id:any;
 
 
   constructor(
@@ -55,12 +56,11 @@ export class AddCourseComponent implements OnInit
       thumbnail: ['']
     });
 
-    this.categoryService.get_all_categories().subscribe((data) => {
-    // this.categoryService.show_all_categories().subscribe((data) => {
-        
+    this.categoryService.get_all_categories().subscribe((data) => 
+    {
       this.cat = data.result;
 
-      console.log(this.cat)
+      // console.log(this.cat)
 
     });
     // localStorage.removeItem('desc');
@@ -68,6 +68,12 @@ export class AddCourseComponent implements OnInit
     this.video_uploader = '0';
     this.course_url = '1';
 
+    let user = localStorage.getItem('currentUser');
+    var trainer_data = JSON.parse(user);
+
+    // console.log(trainer_data['result'].trainer_id);
+
+    this.trainer_id = trainer_data['result'].trainer_id;
 
   }
 
@@ -91,9 +97,9 @@ export class AddCourseComponent implements OnInit
       
 
       const file = fileInput.target.files[0];
-      console.log(file);
-      console.log(file.size);
-      console.log(file.type);
+      // console.log(file);
+      // console.log(file.size);
+      // console.log(file.type);
 
       if(!(file.type.includes('video')))
       {
@@ -193,6 +199,7 @@ export class AddCourseComponent implements OnInit
               formData.append('course_provider', course_provider);
               formData.append('desc', desc);
               formData.append('thumbnail', this.courseForm.get('thumbnail').value);
+              formData.append('trainer_id', this.trainer_id);
               
     if(this.course_url === '1' )
     {
@@ -229,8 +236,15 @@ export class AddCourseComponent implements OnInit
     this.course_provider_value = event.target.value;
     console.log(this.course_provider_value);
 
-    this.course_url = '0';
-    this.video_uploader = '1';
-
+    if(this.course_provider_value === 'video_upload')
+    {
+      this.course_url = '0';
+      this.video_uploader = '1';
+    }
+    else
+    {
+      this.course_url = '1';
+      this.video_uploader = '0';
+    }
   }
 }
