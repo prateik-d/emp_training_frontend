@@ -189,20 +189,19 @@
 										<!-- Modal content-->
 										<div class="modal-content">
 											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h4 class="modal-title">Add Section</h4>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
 											</div>
 											<div class="modal-body">
-												<p>Add Section</p>
 												<form method="post" (ngSubmit)="add_section($event)">
-													<input type="hidden" id="section_course_id" value="{{course.id}}" />
-													<input type="text" id="section_title" class="form-control" />
-													<button type="submit"  class="btn waves-effect waves-light btn-primary">Submit</button>
+													<div class="form-group">
+														<label>Add Section</label>
+														<input type="hidden" id="section_course_id" value="{{course.id}}" />
+														<input type="text" id="section_title" class="form-control" />
+													</div>
+													<button type="submit"  class="btn waves-effect waves-light btn-primary mr-3">Submit</button>
+													<button type="submit"  class="btn waves-effect waves-light btn-secondary">Close</button>
 												</form>
-
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 											</div>
 										</div>	
 									</div>
@@ -215,14 +214,12 @@
 										<!-- Modal content-->
 										<div class="modal-content">
 											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h4 class="modal-title">Add Lesson</h4>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
 											</div>
 											<div class="modal-body">
 												<p>Some text in the modal.</p>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 											</div>
 										</div>	
 									</div>
@@ -234,44 +231,51 @@
 					</div>
 				</div>
 				<div class="row mb-3">
-					<div class="col-md-6">
-						<div class="card">
-							<div class="card-body">
-								<div class="list-group">
-									<div class="row section-title">
-										<div class="col-md-8">
-											<h3>Section 1 title</h3>
-										</div>
-										<div class="col-md-4 text-right">
-											<a href="javascript:void:(0)" data-toggle="modal" data-target="#editsectionPopup"><i class="fa fa-pencil-alt"></i></a><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a>
+					<div class="card w-100">
+						<div class="card-body">
+							<div class="card-header">
+								<h3 class="mb-2">Section Main Title</h3>
+							</div>	
+								<div class="col-md-8 pl-0 mb-3">
+								<div class="card section-card">
+									<div class="card-body">
+										<div class="list-group">
+											<div class="row section-title">
+												<div class="col-md-8">
+													<h3>Section 1 title</h3>
+												</div>
+												<div class="col-md-4 text-right">
+													<a href="javascript:void:(0)" data-toggle="modal" data-target="#editsectionPopup"><i class="fa fa-pencil-alt"></i></a><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a>
+												</div>
+											</div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
 										</div>
 									</div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="card">
-							<div class="card-body">
-								<div class="list-group">
-									<div class="row section-title">
-										<div class="col-md-8">
-											<h3>Section 1 title</h3>
-										</div>
-										<div class="col-md-4 text-right">
-											<a href="javascript:void:(0)" data-toggle="modal" data-target="#editsectionPopup"><i class="fa fa-pencil-alt"></i></a><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a>
+							<div class="col-md-8 pl-0">
+								<div class="card section-card">
+									<div class="card-body">
+										<div class="list-group">
+											<div class="row section-title">
+												<div class="col-md-8">
+													<h3>Section 1 title</h3>
+												</div>
+												<div class="col-md-4 text-right">
+													<a href="javascript:void:(0)" data-toggle="modal" data-target="#editsectionPopup"><i class="fa fa-pencil-alt"></i></a><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a>
+												</div>
+											</div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
+											<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
 										</div>
 									</div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
-									<div class="tab-section"><span>Dummy Data</span><a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a><a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup"><i class="fa fa-pencil-alt"></i></a></div>
 								</div>
 							</div>
 						</div>
@@ -291,11 +295,13 @@
 </button>
 </div>
 <div class="modal-body">
-	<div class="form-group">
-		<input type="text" class="form-control" value="Lorium ipsum"/>
-	</div>
-	<button type="button" class="btn btn-primary mr-3">Save</button>
-	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<form>
+		<div class="form-group">
+			<input type="text" class="form-control" value="Lorium ipsum"/>
+		</div>
+		<button type="button" class="btn btn-primary mr-3">Save</button>
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	</form>
 </div>
 </div>
 </div>
@@ -312,11 +318,13 @@
 	</button>
 	</div>
 	<div class="modal-body">
-		<div class="form-group">
-			<input type="text" class="form-control" value="Lorium ipsum"/>
-		</div>
-		<button type="button" class="btn btn-primary mr-3">Save</button>
-		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<form>
+			<div class="form-group">
+				<input type="text" class="form-control" value="Lorium ipsum"/>
+			</div>
+			<button type="button" class="btn btn-primary mr-3">Save</button>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</form>
 	</div>
 	</div>
 	</div>
