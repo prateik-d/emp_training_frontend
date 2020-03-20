@@ -43,6 +43,17 @@ export class CourseService {
   }
 
 
+
+  get_all_sections(course_id)
+  {
+    // console.log(course_id);
+    return this.http.get<any>(this.serverUrl + 'api/trainer/courses/show_section/'+course_id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

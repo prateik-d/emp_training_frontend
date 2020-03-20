@@ -30,6 +30,7 @@ export class EditCourseComponent implements OnInit
   trainer_id:any;
   course_id:any;
   course = [];
+  sections = [];
   
 
   constructor(
@@ -61,7 +62,7 @@ export class EditCourseComponent implements OnInit
 
     this.course_id = this.route.snapshot.paramMap.get("id");
 
-    console.log(this.course_id);
+    // console.log(this.course_id);
 
     // this.course_id = ;
 
@@ -70,10 +71,18 @@ export class EditCourseComponent implements OnInit
       this.cat = data.result;
       
     });
+    
     this.courseService.get_course_details(this.course_id).subscribe((data) => 
     {
       this.course = data.course;
-      console.log(data.course)
+      // console.log(data.course)
+    });
+    
+
+    this.courseService.get_all_sections(this.course_id).subscribe((data) => 
+    {
+      this.sections = data.result;
+      console.log(this.sections)
     });
     
     this.video_uploader = '0';
