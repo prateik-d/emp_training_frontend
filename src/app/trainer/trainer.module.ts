@@ -10,11 +10,12 @@ import { AddCategoryComponent } from './category/add-category/add-category.compo
 import { CoursesComponent } from './courses/courses.component';
 import { AddCourseComponent } from './courses/add-course/add-course.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
+import { EditLessonsComponent } from './courses/edit-lessons/edit-lessons.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, HeaderComponent, DashboardComponent, DatatablesComponent, CategoryComponent, EditCategoryComponent, AddCategoryComponent, CoursesComponent, AddCourseComponent, EditCourseComponent],
+  declarations: [HomeComponent, HeaderComponent, DashboardComponent, DatatablesComponent, CategoryComponent, EditCategoryComponent, AddCategoryComponent, CoursesComponent, AddCourseComponent, EditCourseComponent, EditLessonsComponent],
   imports: [
     CommonModule
   ]

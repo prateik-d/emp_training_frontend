@@ -14149,7 +14149,8 @@ a.text-purple:hover {
 	width: 100%
 }
 #main-wrapper[data-layout=vertical][data-header-position=fixed] .page-wrapper {
-	padding-top: 80px
+	padding-top: 80px;
+	display: block;
 }
 #main-wrapper[data-layout=vertical][data-boxed-layout=boxed] {
 	max-width: 1200px;

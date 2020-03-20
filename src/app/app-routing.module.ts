@@ -17,6 +17,7 @@ import { EditCourseComponent } from './trainer/courses/edit-course/edit-course.c
 
 
 import { InvalidComponent } from './invalid/invalid.component';
+import { EditLessonsComponent } from './trainer/courses/edit-lessons/edit-lessons.component';
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path : 'trainer/course', component:CoursesComponent },
   { path : 'trainer/course/add', component:AddCourseComponent },
   { path : 'trainer/course/edit/:id', component:EditCourseComponent },
+  { path : 'trainer/course/edit-lessons/:id', component:EditLessonsComponent },
 
   { path: '', component:HomeComponent },
   { path : '**', component:InvalidComponent }

@@ -17,7 +17,6 @@ import { CoursesComponent } from './trainer/courses/courses.component';
 import { AddCourseComponent } from './trainer/courses/add-course/add-course.component';
 import { EditCourseComponent } from './trainer/courses/edit-course/edit-course.component';
 
-
 import { DataTablesModule } from 'angular-datatables';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TrainerModule } from './trainer/trainer.module';
 import { InvalidComponent } from './invalid/invalid.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { EditLessonsComponent } from './trainer/courses/edit-lessons/edit-lessons.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
     CoursesComponent,
     AddCourseComponent,
     EditCourseComponent,
-    InvalidComponent
+    InvalidComponent,
+    EditLessonsComponent
   ],
   imports: [
     BrowserModule,
