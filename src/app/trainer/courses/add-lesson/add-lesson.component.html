@@ -9,7 +9,7 @@
                             <ol class="breadcrumb m-0 p-0">
                                 <li class="breadcrumb-item"><a [routerLink]="['/trainer/dashboard']" class="text-muted">Home</a></li>
                                 <li class="breadcrumb-item"><a [routerLink]="['/trainer/course/']" class="text-muted">Courses</a></li>
-                                <li class="breadcrumb-item text-muted active" aria-current="page">Edit Lessons</li>
+                                <li class="breadcrumb-item text-muted active" aria-current="page">Add Lessons</li>
                             </ol>
                         </nav>
                     </div>
@@ -17,28 +17,25 @@
             </div>
         </div>
 
-        {{lesson.duration}}
-
         <div class="container-fluid">
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <form method="post" enctype="multipart/form-data" (ngSubmit)="edit($event)" >
+                            <form method="post" enctype="multipart/form-data" (ngSubmit)="create($event)" >
                                 <div class="row mb-4">
                                     <div class="col-md-6 col-sm-12">		
                                         <div class="form-group">
                                             <label class="text-dark" for="title">Title</label>
-                                            <input type="hidden" class="form-control" id="id"  value="{{lesson.id}}" />
-                                            <input type="text" class="form-control" id="title" placeholder="Title" value="{{lesson.title}}" />
+                                            <input type="text" class="form-control" id="title" placeholder="Title" />
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">	
                                             <label class="text-dark" for="section">Section</label>
-                                            <select class="js-example-placeholder-single js-states form-control" id="section">
-                                                <option selected="selected" value="{{section_details.id}}">{{section_details.title}}</option>
+                                            <select class="js-example-placeholder-single js-states form-control" id="section">	
+                                                <option value="0" disabled="disabled">Select Section</option>
                                                 <option *ngFor="let section of sections" value="{{section.id}}">{{section.title}}</option>
                                             </select>
                                         </div>
@@ -48,14 +45,12 @@
                                         <div class="form-group">	
                                             <label class="text-dark" for="lesson_type">Lesson Type</label>
                                             <select class="js-example-placeholder-single js-states form-control" (change)="getLessonType($event)" id="lesson_type">
-                                                <option selected="selected" value="{{lesson.lesson_type}}">
-                                                        {{lesson.lesson_type | replaceUnderscore | titlecase }}
-                                                </option>
-                                                <option value="video" *ngIf="lesson.lesson_type != 'video'">Video</option>
-                                                <option value="text_file" *ngIf="lesson.lesson_type != 'text_file'">Text File</option>
-                                                <option value="pdf_file" *ngIf="lesson.lesson_type != 'pdf_file'">PDF File</option>
-                                                <option value="document_file" *ngIf="lesson.lesson_type != 'document_file'">Document File</option>
-                                                <option value="image_file" *ngIf="lesson.lesson_type != 'image_file'">Image File</option>
+                                                <option value="0" disabled="disabled">Select Lesson Type</option>
+                                                <option value="video">Video URL</option>
+                                                <option value="text_file">Text File</option>
+                                                <option value="pdf_file">PDF File</option>
+                                                <option value="document_file">Document File</option>
+                                                <option value="image_file">Image File</option>
                                             </select>
                                         </div>
                                     </div>
@@ -87,12 +82,10 @@
                                                         (change)="getLessonProvider($event)"
                                                         id="lesson_provider"
                                                         >
-                                                    <option selected="selected" value="{{lesson.video_type}}">
-                                                        {{lesson.video_type | replaceUnderscore | titlecase }}
-                                                    </option>
-                                                    <option value="youtube" *ngIf="lesson.video_type != 'youtube'">Youtube</option>
-                                                    <option value="vimeo"  *ngIf="lesson.video_type != 'vimeo'">Vimeo</option>
-                                                    <option value="video_upload" *ngIf="lesson.video_type != 'video_upload'">Video Upload</option>
+                                                    <option value="0" disabled="disabled">Select Lesson Provider</option>
+                                                    <option value="youtube">Youtube</option>
+                                                    <option value="vimeo">Vimeo</option>
+                                                    <option value="video_upload">Video Upload</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -110,27 +103,27 @@
                                         <div class="col-md-6 col-sm-12 float-left">
                                             <div class="form-group">	
                                                 <label class="text-dark" for="lname">Video duration</label>
-                                                <input type="text" class="form-control" id="video_duration" value="{{lesson.duration}}" />
+                                                <input type="text" class="form-control" id="video_duration" placeholder="00:10:00" />
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <div *ngIf="lesson_provider === 'video_upload'" class="col-md-12 col-sm-12">
-                                        <div class="col-md-6 col-sm-12 float-left padding-left-0">
+                                    <div *ngIf="lesson_provider === 'video_upload'" class="col-md-12 col-sm-12 padding-0">
+                                        <div class="col-md-6 col-sm-12 float-left">
                                             <div class="form-group">	
                                                 <label class="text-dark" for="lname">Video Upload</label>
                                                 <input type="file" class="form-control" id="video_upload" (change)="video_upload($event)" />
                                             </div>
                                         </div>
                                         
-                                        <div class="col-md-6 col-sm-12 float-left padding-right-0">
+                                        <div class="col-md-6 col-sm-12 float-left">
                                             <div class="form-group">	
                                                 <label class="text-dark" for="lname">Video Duration</label>
-                                                <input type="text" class="form-control"  id="video_duration" value="{{lesson.duration}}" />
+                                                <input type="text" class="form-control"  id="video_duration" placeholder="10:00" />
                                             </div>
                                         </div>
                                         
-                                        <div class="col-md-6 col-sm-12 float-left padding-left-0">
+                                        <div class="col-md-6 col-sm-12 float-left">
                                             <div class="form-group">	
                                                 <label class="text-dark" for="lname">Video upload thumbnail (The image size should be: 979 x 551)</label>
                                                 <!-- <input type="file" class="form-control" id="video_thumbnail" /> -->
@@ -159,7 +152,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">	
                                             <label class="text-dark" for="lname">Summary</label>
-                                            <textarea class="form-control" id="summary" placeholder="Summary">{{lesson.summary}}</textarea>
+                                            <textarea class="form-control" id="summary" placeholder="Summary"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12">

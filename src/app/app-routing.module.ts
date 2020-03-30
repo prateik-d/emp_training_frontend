@@ -13,11 +13,12 @@ import { EditCategoryComponent } from './trainer/category/edit-category/edit-cat
 import { CoursesComponent } from './trainer/courses/courses.component';
 import { AddCourseComponent } from './trainer/courses/add-course/add-course.component';
 import { EditCourseComponent } from './trainer/courses/edit-course/edit-course.component';
+import { EditLessonsComponent } from './trainer/courses/edit-lessons/edit-lessons.component';
+import { AddLessonComponent } from './trainer/courses/add-lesson/add-lesson.component';
 
 
 
 import { InvalidComponent } from './invalid/invalid.component';
-import { EditLessonsComponent } from './trainer/courses/edit-lessons/edit-lessons.component';
 
 
 
@@ -36,7 +37,8 @@ const routes: Routes = [
   { path : 'trainer/course', component:CoursesComponent },
   { path : 'trainer/course/add', component:AddCourseComponent },
   { path : 'trainer/course/edit/:id', component:EditCourseComponent },
-  { path : 'trainer/course/edit-lessons/:id', component:EditLessonsComponent },
+  { path : 'trainer/course/edit-lesson/:id', component:EditLessonsComponent },
+  { path : 'trainer/course/add-lesson/:id', component:AddLessonComponent },
 
   { path: '', component:HomeComponent },
   { path : '**', component:InvalidComponent }

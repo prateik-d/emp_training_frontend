@@ -19,7 +19,7 @@ export class CoursesComponent implements OnInit {
 
     this.courseService.get_all_courses().subscribe((data) => {
         
-     // this.courses = data.result;
+     this.courses = data.result;
 
       console.log(data);
       
@@ -31,9 +31,4 @@ export class CoursesComponent implements OnInit {
   {
 
   }
-
-  // ngOnDestroy(): void {
-  //   // Do not forget to unsubscribe the event
-  //   this.dtTrigger.unsubscribe();
-  // }
 }

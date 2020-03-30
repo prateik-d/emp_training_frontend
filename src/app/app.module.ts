@@ -16,6 +16,8 @@ import { EditCategoryComponent } from './trainer/category/edit-category/edit-cat
 import { CoursesComponent } from './trainer/courses/courses.component';
 import { AddCourseComponent } from './trainer/courses/add-course/add-course.component';
 import { EditCourseComponent } from './trainer/courses/edit-course/edit-course.component';
+import { EditLessonsComponent } from './trainer/courses/edit-lessons/edit-lessons.component';
+import { AddLessonComponent } from './trainer/courses/add-lesson/add-lesson.component';
 
 import { DataTablesModule } from 'angular-datatables';
 
@@ -25,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TrainerModule } from './trainer/trainer.module';
 import { InvalidComponent } from './invalid/invalid.component';
 import { CKEditorModule } from 'ckeditor4-angular';
-import { EditLessonsComponent } from './trainer/courses/edit-lessons/edit-lessons.component';
+import { ReplaceUnderscorePipe } from './replace-underscore.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { EditLessonsComponent } from './trainer/courses/edit-lessons/edit-lesson
     AddCourseComponent,
     EditCourseComponent,
     InvalidComponent,
-    EditLessonsComponent
+    EditLessonsComponent,
+    AddLessonComponent,
+    ReplaceUnderscorePipe
   ],
   imports: [
     BrowserModule,

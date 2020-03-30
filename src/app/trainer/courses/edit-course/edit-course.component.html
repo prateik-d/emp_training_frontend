@@ -9,7 +9,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a [routerLink]="['/trainer/dashboard']" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item"><a [routerLink]="['/trainer/course/']" class="text-muted">Courses</a></li>
+                                    <li class="breadcrumb-item"><a [routerLink]="['/trainer/course/add-lesson']" class="text-muted">Courses</a></li>
                                     <li class="breadcrumb-item text-muted active" aria-current="page">Add Courses</li>
                                 </ol>
                             </nav>
@@ -28,7 +28,7 @@
 				<!-- ---------------------------------- -->
 			<!-- </div> -->
 
-			{{course.id}}
+			<!-- {{course.id}}
 			{{course.title}}
 			{{course.short_description}}
 			{{course.description}}
@@ -37,7 +37,7 @@
 			{{course.language}}
 			{{course.level}}
 			{{course.level}}
-			{{course.course_overview_provider}}
+			{{course.course_overview_provider}} -->
 
             <div class="container-fluid">
 				<div class="card mb-4">
@@ -51,7 +51,7 @@
 										</div>
 										<div class="col-md-8 text-right">
 											<button type="button" class="btn btn-info mr-3" data-toggle="modal" data-target="#section">Add Section</button>
-											<button type="button" class="btn btn-info" data-toggle="modal" data-target="#lesson">Add Lesson</button>
+											<button type="button" class="btn btn-info" [routerLink]="['../../add-lesson/', course.id]" routerLinkActive="router-link-active" >Add Lesson</button>
 										</div>
 									</div>
 									<div class="row mb-4">
@@ -109,7 +109,7 @@
 												<div class="col-md-12">
 													<div class="form-group">
 														<label class="text-dark" for="lname">Description</label>
-														<ckeditor id="desc" (blur)="ckeditor_data($event)">npm</ckeditor>
+														<ckeditor id="desc" (blur)="ckeditor_data($event)" data="{{course.description}}">npm</ckeditor>
 													</div>
 												</div>
 											</div>
@@ -137,12 +137,13 @@
 											<div class="form-group">
 												<label class="text-dark" for="">Course overview provider</label>
 												<select class="js-example-placeholder-single js-states form-control" id="course_provider" (change)="course_provider($event)">
-													<option selected="selected" value="{{course.course_overview_provider}}">{{course.course_overview_provider}}</option>
-													<!-- <option disabled="disabled" selected="selected" value="0">Select Language </option> -->
-													<option value="Youtube">Youtube</option>
-													<option value="Viemo">Viemo</option>
-													<option value="HTML5">HTML5</option>
-													<option value="video_upload">Video Upload</option>
+													<option selected="selected" value="{{course.course_overview_provider}}">
+														{{course.course_overview_provider | replaceUnderscore | titlecase }}
+													</option>
+													<option value="Youtube"  *ngIf="course.course_overview_provider != 'youtube'">Youtube</option>
+													<option value="Viemo"  *ngIf="course.course_overview_provider != 'vimeo'">Viemo</option>
+													<!-- <option value="HTML5">HTML5</option> -->
+													<option value="video_upload"  *ngIf="course.course_overview_provider != 'video_upload'">Video Upload</option>
 												</select>
 											</div>
 											<input type="hidden" id="outcomes" value="[]"/>
@@ -200,7 +201,7 @@
 														<input type="text" id="section_title" class="form-control" />
 													</div>
 													<button type="submit"  class="btn waves-effect waves-light btn-primary mr-3">Submit</button>
-													<button type="submit"  class="btn waves-effect waves-light btn-secondary">Close</button>
+													<button type="button"  class="btn waves-effect waves-light btn-secondary">Close</button>
 												</form>
 											</div>
 										</div>	
@@ -236,7 +237,7 @@
 							<div class="card-header">
 								<h3 class="mb-2">Sections</h3>
 							</div>	
-							<div class="col-md-8 pl-0 mb-3" *ngFor="let section of sections">
+							<div class="col-md-8 pl-0 mb-3" *ngFor="let section of sections; index as section_count">
 								<div class="card section-card">
 									<div class="card-body">
 										<div class="list-group">
@@ -246,68 +247,54 @@
 													<h3>{{section.title}}</h3>
 												</div>
 												<div class="col-md-4 text-right">
-													<a href="javascript:void:(0)" data-toggle="modal" data-target="#section_{{section.id}}"><i class="fa fa-pencil-alt"></i></a>
-													<a href="javascript:void:(0)"><i class="fa fa-trash-alt"></i></a>
+													<a  id="sec_{{section.id}}" (click)="setSectionData(section_count)" data-toggle="modal"  data-target="#section_details" ><i class="fa fa-pencil-alt"></i></a>
+													<a href="javascript:void:(0)" (click)="setSectionData(section_count)" data-toggle="modal"  data-target="#delete_details"><i class="fa fa-trash-alt"></i></a>
 												</div>
 											</div>
-											<!--Edit Section-->
-									<div class="modal fade" id="section_{{section.id}}" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLongTitle">Edit Section</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<form>
-														<div class="form-group">
-															<input type="text" class="form-control" id="section_title_edit" value="{{section.title}}"/>
-															<input type="hidden" class="form-control" id="section_id_edit" value="{{section.id}}"/>
-														</div>
-														<button type="button" class="btn btn-primary mr-3">Save</button>
-														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>
-											
-											<div class="tab-section" *ngFor="let lesson of section.lessons">
+
+													
+											<div class="tab-section" *ngFor="let lesson of section.lessons; index as lesson_count">
 												<span>{{lesson.title}}</span>
-												<a href="javascript:void:(0)">
+												<a 
+													href="javascript:void:(0)" 
+													data-toggle="modal"
+													[attr.data-target]="'#delete_lesson_' + lesson.id"
+													>
 													<i class="fa fa-trash-alt"></i>
 												</a>
-												<a href="javascript:void:(0)" data-toggle="modal" data-target="#editPopup">
+
+												<!-- create new compo for edit lesson -->
+												<a href="javascript:void:(0)" data-toggle="modal" [routerLink]="['../../edit-lesson/', lesson.id]" routerLinkActive="router-link-active"  > 
 													<i class="fa fa-pencil-alt"></i>
 												</a>
 												
-												<!-- Edit lesson -->
-												<!-- <div class="modal fade" id="editPopup" tabindex="-1" role="dialog" aria-hidden="true">
+												<!-- delete lesson -->
+												<div class="modal fade" id="delete_lesson_{{lesson.id}}" tabindex="-1" role="dialog" aria-hidden="true">
 													<div class="modal-dialog modal-dialog-centered" role="document">
 														<div class="modal-content">
 															<div class="modal-header">
-																<h5 class="modal-title" id="exampleModalLongTitle">Edit Lesson</h5>
+																<h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete ?</h5>
 																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																	<span aria-hidden="true">&times;</span>
 																</button>
 															</div>
 															<div class="modal-body">
-																<form>
+																<form method="POST" (click)="delete_lesson(lesson.id)">
+																
 																	<div class="form-group">
-																		<input type="hidden" id="lesson_id" class="form-control" value="{{lesson.id}}"/>
-																		<input type="text" id="lesson_title" class="form-control" value="{{lesson.title}}"/>
+																		<input type="hidden" name="id" value="{{lesson.id}}">
 																	</div>
-																	<button type="button" class="btn btn-primary mr-3">Save</button>
+																	<button type="submit" class="btn btn-primary mr-3">Delete</button>
 																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 																</form>
 															</div>
 														</div>
 													</div>
-												</div> -->
+												</div>
 													
 											</div>
+											
+
 											
 										</div>
 									</div>
@@ -316,6 +303,57 @@
 								
 
 							</div>
+
+
+											<!--Edit Section-->
+											<div *ngIf="currentSection" class="modal fade" id="section_details" tabindex="-1" role="dialog" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLongTitle">Edit Section</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form method="POST" (click)="edit_section(currentSection.id, currentSection.title)">
+															
+																<div class="form-group">
+																	<input type="text" class="form-control" name="title" [(ngModel)]="currentSection.title"/>
+																</div>
+																<button type="submit" class="btn btn-primary mr-3">Save</button>
+																<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<!--Delete Section-->
+											<div *ngIf="currentSection" class="modal fade" id="delete_details" tabindex="-1" role="dialog" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete ?</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form method="POST" (click)="delete_section(currentSection.id)">
+															
+																<div class="form-group">
+																	<input type="hidden" name="id" [(ngModel)]="currentSection.id">
+																	<!-- <input type="text" class="form-control" name="title" [(ngModel)]="currentSection.title"/> -->
+																</div>
+																<button type="submit" class="btn btn-primary mr-3">Delete</button>
+																<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
 						</div>
 					</div>
 				</div>

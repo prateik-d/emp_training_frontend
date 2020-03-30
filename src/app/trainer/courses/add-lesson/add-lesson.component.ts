@@ -3,21 +3,18 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from 'src/app/shares/trainer/course.service';
 import { HttpClient } from '@angular/common/http';
-import { exists } from 'fs';
+
 
 @Component({
-  selector: 'app-edit-lessons',
-  templateUrl: './edit-lessons.component.html',
-  styleUrls: ['./edit-lessons.component.css']
+  selector: 'app-add-lesson',
+  templateUrl: './add-lesson.component.html',
+  styleUrls: ['./add-lesson.component.css']
 })
-export class EditLessonsComponent implements OnInit {
-
-  lesson = [];
+export class AddLessonComponent implements OnInit 
+{
   sections = [];
-  section_details = [];
   section_id:any;
   course_id:any;
-  lesson_id:any;
   lesson_type:any;
   lesson_provider:any;
   lessonForm: FormGroup;
@@ -37,6 +34,7 @@ export class EditLessonsComponent implements OnInit {
 
   ngOnInit() 
   {
+
     
     this.lessonForm = this.fb.group({
       title: ['', Validators.required],
@@ -50,67 +48,45 @@ export class EditLessonsComponent implements OnInit {
       video_upload: [''],
       summary: [''],
     });
-  
-    this.lesson_id = this.route.snapshot.paramMap.get("id");
 
-    this.courseService.test().subscribe((data) => 
+
+
+    this.course_id = this.route.snapshot.paramMap.get("id");
+
+    // console.log(this.course_id);
+
+    this.courseService.get_all_sections(this.course_id).subscribe((data) => 
     {
-      console.log(data);
-    });
-
-    this.courseService.get_lesson_details(this.lesson_id).subscribe((data) => 
-    {
-      this.lesson = data.result;
-      this.course_id = data.result.course_id;
-      this.section_id = data.result.section_id;
-      this.lesson_provider = data.result.video_type;
-      this.lesson_type = data.result.lesson_type;
-      console.log(this.lesson)
-      // console.log(this.lesson_provider)
-      
-      this.courseService.get_all_sections(this.course_id).subscribe((data) => 
-      {
-        this.sections = data.result;
-        // console.log(this.sections)
-      });
-      
-      
-      this.courseService.get_section_detaills(this.section_id).subscribe((data) => 
-      {
-        this.section_details = data.result;
-        
-        // console.log(this.section_details)
-
-      });
-      
+      this.sections = data.result;
+      console.log(this.sections)
     });
     
   }
 
-  edit(event)
+  create(event)
   {
+
     const formData = new FormData();
 
-    var id = ((document.getElementById("id") as HTMLInputElement).value);
     var title = ((document.getElementById("title") as HTMLInputElement).value);
     var section = ((document.getElementById("section") as HTMLInputElement).value);
     var lesson_type = ((document.getElementById("lesson_type") as HTMLInputElement).value);
     var summary = ((document.getElementById("summary") as HTMLInputElement).value);
 
-    
-
-    formData.append('id', id);
     formData.append('title', title);
     formData.append('section_id', section);
     formData.append('course_id', this.course_id);
     formData.append('lesson_type', lesson_type);
     formData.append('summary', summary);
-
+    
+    // console.log(title);
+    // console.log(section);
+    // console.log(lesson_type);
+    
     if(lesson_type === 'video')
     {
       var lesson_provider = ((document.getElementById("lesson_provider") as HTMLInputElement).value);
-      console.log(lesson_provider);
-      
+      // console.log(lesson_provider);
       formData.append('lesson_provider', lesson_provider);
       if(lesson_provider === 'youtube' || lesson_provider === 'vimeo' )
       {
@@ -125,24 +101,23 @@ export class EditLessonsComponent implements OnInit {
         formData.append('thumbnail',  this.lessonForm.get('video_thumbnail').value);
       }
       var video_duration = ((document.getElementById("video_duration") as HTMLInputElement).value);
-      console.log(video_duration);
+      // console.log(video_duration);
       formData.append('duration', video_duration);
 
     }
-    else{
+    
+    formData.append('attachment',  this.lessonForm.get('attachment').value);
+    // console.log(summary);
 
-      formData.append('attachment',  this.lessonForm.get('attachment').value);
-    }
 
-
-    this.courseService.edit_lesson(formData).subscribe((data) => {
+    this.courseService.add_lesson(formData).subscribe((data) => {
       
       console.log(data);
       
     });
 
-    
   }
+
 
   getLessonType(event)
   {
@@ -159,7 +134,6 @@ export class EditLessonsComponent implements OnInit {
     // console.log(event.target.value);
     this.lesson_provider = event.target.value;
   }
-
 
 
   video_upload(fileInput: any) {
@@ -246,7 +220,6 @@ export class EditLessonsComponent implements OnInit {
       this.previewUrl = reader.result; 
     }
   }
-
 
 
 

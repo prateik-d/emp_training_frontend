@@ -44,6 +44,16 @@ export class CourseService {
 
 
 
+  test()
+  {
+    // console.log(course_id);
+    return this.http.get<any>('https://partyspace.com/api/events/getEvents')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   get_all_sections(course_id)
   {
     // console.log(course_id);
@@ -52,6 +62,76 @@ export class CourseService {
         catchError(this.handleError)
       );
   }
+
+
+  get_section_detaills(section_id)
+  {
+    return this.http.get<any>(this.serverUrl + 'api/trainer/courses/get_section/'+section_id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  get_lesson_details(section_id)
+  {
+    return this.http.get<any>(this.serverUrl + 'api/trainer/courses/get_lesson/'+section_id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  add_section(data)
+  {
+      return this.http.post<any>(this.serverUrl + 'api/trainer/courses/add_section', data)
+        .pipe(
+          catchError(this.handleError)
+        );
+  }
+
+
+  edit_section(data)
+  {
+      return this.http.post<any>(this.serverUrl + 'api/trainer/courses/edit_section', data)
+        .pipe(
+          catchError(this.handleError)
+        );
+  }
+
+  delete_section(section_id)
+  {
+    return this.http.get<any>(this.serverUrl + 'api/trainer/courses/delete_section/'+section_id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  add_lesson(data)
+  {
+      return this.http.post<any>(this.serverUrl + 'api/trainer/courses/add_lesson', data)
+        .pipe(
+          catchError(this.handleError)
+        );
+  }
+
+
+  edit_lesson(data)
+  {
+      return this.http.post<any>(this.serverUrl + 'api/trainer/courses/edit_lesson', data)
+        .pipe(
+          catchError(this.handleError)
+        );
+  }
+
+  delete_lesson(lesson_id)
+  {
+    return this.http.get<any>(this.serverUrl + 'api/trainer/courses/delete_lesson/'+lesson_id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
 
 
   private handleError(error: HttpErrorResponse) {
