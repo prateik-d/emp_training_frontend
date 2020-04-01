@@ -1,5 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AppRoutingModule } from '../app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+
+
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -13,12 +20,44 @@ import { EditCourseComponent } from './courses/edit-course/edit-course.component
 import { EditLessonsComponent } from './courses/edit-lessons/edit-lessons.component';
 import { AddLessonComponent } from './courses/add-lesson/add-lesson.component';
 
+import { ReplaceUnderscorePipe } from '../replace-underscore.pipe';
+
+import { CKEditorModule } from 'ckeditor4-angular';
+import { DataTablesModule } from 'angular-datatables';
+
+
+
+
 
 
 @NgModule({
-  declarations: [HomeComponent, HeaderComponent, DashboardComponent, DatatablesComponent, CategoryComponent, EditCategoryComponent, AddCategoryComponent, CoursesComponent, AddCourseComponent, EditCourseComponent, EditLessonsComponent, AddLessonComponent],
+  declarations: [
+    HomeComponent, 
+    HeaderComponent, 
+    DashboardComponent, 
+    DatatablesComponent, 
+    CategoryComponent, 
+    EditCategoryComponent, 
+    AddCategoryComponent, 
+    CoursesComponent, 
+    AddCourseComponent, 
+    EditCourseComponent, 
+    EditLessonsComponent, 
+    AddLessonComponent,
+    ReplaceUnderscorePipe
+
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    HttpClientModule,
+    CKEditorModule,
+    DataTablesModule,
   ]
 })
 export class TrainerModule { }
