@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 })
 export class CoursesComponent implements OnInit {
   courses = [];
+  courseError: any;
   constructor(
     private router: Router,
     private courseService: CourseService
@@ -21,7 +22,7 @@ export class CoursesComponent implements OnInit {
         
      this.courses = data.result;
 
-      console.log(data);
+      // console.log(data);
       
     });
   }
@@ -30,5 +31,22 @@ export class CoursesComponent implements OnInit {
   ngOnInit() 
   {
 
+  }
+  delete(course_id)
+  {
+    this.courseService.delete(course_id).subscribe((data) => 
+    {
+      console.log(data); 
+
+      if (data.status === '400') 
+      {
+        this.courseError = 'something went wrong...';
+      } 
+      else 
+      {
+        this.router.navigate(['/trainer/course']);
+      }
+      
+    });
   }
 }

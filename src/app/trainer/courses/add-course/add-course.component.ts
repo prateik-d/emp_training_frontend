@@ -28,6 +28,7 @@ export class AddCourseComponent implements OnInit
   video_uploader:any;
   course_url:any;
   trainer_id:any;
+  courseError:any;
 
 
   constructor(
@@ -216,6 +217,14 @@ export class AddCourseComponent implements OnInit
     this.courseService.create(formData).subscribe((data) => {
       
       console.log(data);
+      if (data.status === '400') 
+      {
+        this.courseError = 'something went wrong...';
+      } 
+      else 
+      {
+        this.router.navigate(['/trainer/course/']);
+      }
       
       
     });

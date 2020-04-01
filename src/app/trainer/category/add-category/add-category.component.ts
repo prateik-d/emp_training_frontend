@@ -48,22 +48,6 @@ export class AddCategoryComponent implements OnInit {
         
       });
 
-      // if(localStorage.getItem('currentUser'))
-      // {
-      //   let user = localStorage.getItem('currentUser');
-      //   var json = JSON.parse(user);
-
-      //   if(json["user"] != 'trainer')
-      //   {
-      //     this.router.navigate(['/trainer/']);
-      //   }
-      // }
-      // else
-      // {
-      //   this.router.navigate(['/trainer/']);
-      // }
-        
-
     }
 
     
@@ -132,28 +116,19 @@ export class AddCategoryComponent implements OnInit {
       }
           this.categoryService.create(formData).subscribe((data) => {
 
-              // if (data.status === '400') 
-              // {
-              //   this.categoryError = 'something went wrong...';
-              // } 
-              // else 
-              // {
-              //   this.router.navigate(['/report-manager/category/']);
-              // }
+              if (data.status === '400') 
+              {
+                this.categoryError = 'something went wrong...';
+              } 
+              else 
+              {
+                this.router.navigate(['/trainer/course/']);
+              }
               console.log(data);
 
           });
     }
       
-
-    // console.log(title);
-    // console.log(font_awesome_class.length);
-    // console.log(thumbnail);
-    // console.log(parent);
-    
-    // console.log(this.categoryForm.value);
-
-
   }
  
   getBase64(evt)

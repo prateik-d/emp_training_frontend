@@ -39,12 +39,15 @@
 			{{course.level}}
 			{{course.course_overview_provider}} -->
 
+			<!-- {{subcategory_id}}
+			{{subcategory_title}} -->
+
             <div class="container-fluid">
 				<div class="card mb-4">
 					<div class="card-body">
 						<div class="row">
 							<div class="col-12">
-								<form (ngSubmit)="create($event)" method="post" enctype="multipart/form-data">
+								<form (ngSubmit)="edit($event)" method="post" enctype="multipart/form-data">
 									<div class="row form-title">
 										<div class="col-md-4 align-self-center">
 											<h3 class="mb-0">Basic</h3> 
@@ -58,6 +61,7 @@
 										<div class="col-md-6 col-sm-12">
 											<div class="form-group">
 												<label class="text-dark" for="lname">Course Title<small class="required">*</small></label>
+												<input type="hidden" class="form-control" id="id" value="{{course.id}}">
 												<input type="text" class="form-control" id="title" value="{{course.title}}">
 											</div>
 											<div class="form-group">
@@ -71,12 +75,12 @@
 													id="sub_category_id"
 													>	
 														<!-- <option disabled="disabled" selected="selected" value="0">Select Category</option> -->
-														<option selected="select">sd</option>
+														<option selected="select" value="{{subcategory_id}}">{{subcategory_title}}</option>
 														<optgroup *ngFor='let option of cat' value="option.id" label="{{option.name}}">
 															<option 
 																class='sub_cat' 
 																*ngFor="let sub of option.parent_list"
-																[value]="sub.id"
+																value="{{sub.id}}"
 																>
 																{{sub.name}}
 															</option>

@@ -23,6 +23,7 @@ export class EditLessonsComponent implements OnInit {
   lessonForm: FormGroup;
   fileData: File;
   previewUrl: string | ArrayBuffer;
+  lessonError:any;
 
   constructor(
     private fb: FormBuilder,
@@ -53,10 +54,10 @@ export class EditLessonsComponent implements OnInit {
   
     this.lesson_id = this.route.snapshot.paramMap.get("id");
 
-    this.courseService.test().subscribe((data) => 
-    {
-      console.log(data);
-    });
+    // this.courseService.test().subscribe((data) => 
+    // {
+    //   console.log(data);
+    // });
 
     this.courseService.get_lesson_details(this.lesson_id).subscribe((data) => 
     {
@@ -138,7 +139,16 @@ export class EditLessonsComponent implements OnInit {
     this.courseService.edit_lesson(formData).subscribe((data) => {
       
       console.log(data);
-      
+
+      if (data.status === '400') 
+      {
+        this.lessonError = 'something went wrong...';
+      } 
+      else 
+      {
+        this.router.navigate(['/trainer/course/']);
+        
+      }
     });
 
     

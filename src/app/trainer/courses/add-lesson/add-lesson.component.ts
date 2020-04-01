@@ -20,6 +20,7 @@ export class AddLessonComponent implements OnInit
   lessonForm: FormGroup;
   fileData: File;
   previewUrl: string | ArrayBuffer;
+  lessonError:any;
 
   constructor(
     private fb: FormBuilder,
@@ -113,6 +114,16 @@ export class AddLessonComponent implements OnInit
     this.courseService.add_lesson(formData).subscribe((data) => {
       
       console.log(data);
+
+      if (data.status === '400') 
+      {
+        this.lessonError = 'something went wrong...';
+      } 
+      else 
+      {
+        this.router.navigate(['/trainer/course/']);
+      }
+      
       
     });
 

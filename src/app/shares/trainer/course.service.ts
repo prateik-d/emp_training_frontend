@@ -33,6 +33,24 @@ export class CourseService {
   }
 
 
+  edit(data) {
+    
+    return this.http.post<any>(this.serverUrl + 'api/trainer/courses/edit', data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  delete(course_id)
+  {
+    return this.http.get<any>(this.serverUrl + 'api/trainer/courses/delete/'+course_id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+
   get_course_details(course_id)
   {
     // console.log(course_id);
@@ -131,8 +149,6 @@ export class CourseService {
         catchError(this.handleError)
       );
   }
-
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
