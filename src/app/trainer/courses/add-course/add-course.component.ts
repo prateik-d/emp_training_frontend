@@ -7,7 +7,6 @@ import { element } from 'protractor';
 import { HttpClient } from '@angular/common/http';
 import { CKEditor4 } from 'ckeditor4-angular/ckeditor';
 
-
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
