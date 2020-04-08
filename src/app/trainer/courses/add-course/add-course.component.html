@@ -31,6 +31,7 @@
 
             <div class="container-fluid">
 				<div class="card">
+					<div class="loader" *ngIf="isLoad"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
 					<div class="card-body">
 						<div class="row">
 							<div class="col-12">
@@ -42,9 +43,15 @@
 												<label class="text-dark" for="lname">Course Title<small class="required">*</small></label>
 												<input type="text" class="form-control" id="title">
 											</div>
+											<div class="alert alert-danger" *ngIf="titleError">
+												{{titleError}}
+											</div>
 											<div class="form-group">
 												<label class="text-dark" for="fname">Short Description</label>
 												<input type="text" class="form-control" id="short_desc">
+											</div>
+											<div class="alert alert-danger" *ngIf="descError">
+												{{descError}}
 											</div>
 											<div class="form-group">	
 												<label class="text-dark" for="lname">Category<small class="required">*</small></label>
@@ -64,6 +71,9 @@
 													</optgroup>
 												</select>
 											</div>
+											<div class="alert alert-danger" *ngIf="categoryError">
+												{{categoryError}}
+											</div>
 											<input type="hidden" id="requirements" value="[]"/>
 											<div class="form-group">
 												<label class="text-dark" for="lname">Language made in</label>
@@ -72,6 +82,9 @@
 													<option value="English">English</option>
 													<option value="Hindi">Hindi</option>
 												</select>
+											</div>
+											<div class="alert alert-danger" *ngIf="languageError">
+												{{languageError}}
 											</div>
 											<div class="form-group">
 												<label class="text-dark" for="lname">Level</label>
@@ -82,13 +95,19 @@
 													<option value="Advance">Advance</option>
 												</select>
 											</div>
+											<div class="alert alert-danger" *ngIf="levelError">
+												{{levelError}}
+											</div>
 										</div>
 										<div class="col-md-6 col-sm-12">
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
 														<label class="text-dark" for="lname">Description</label>
-														<ckeditor id="desc" (blur)="ckeditor_data($event)">npm</ckeditor>
+														<ckeditor id="desc" (blur)="ckeditor_data($event)">npm</ckeditor>	
+													</div>
+													<div class="alert alert-danger" *ngIf="editorError">
+														{{editorError}}
 													</div>
 												</div>
 											</div>

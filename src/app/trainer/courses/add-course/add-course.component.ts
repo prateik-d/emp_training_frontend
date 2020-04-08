@@ -15,6 +15,8 @@ import { CKEditor4 } from 'ckeditor4-angular/ckeditor';
 })
 export class AddCourseComponent implements OnInit 
 {
+  isLoad = 0;
+
   cat = [];
   sub_cat = [];
   selectedCat:any;
@@ -29,8 +31,14 @@ export class AddCourseComponent implements OnInit
   course_url:any;
   trainer_id:any;
   courseError:any;
+  titleError: string;
+  descError: string;
+  categoryError: string;
+  languageError: string;
+  levelError: string;
+  editorError: string;
 
-
+  
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -43,7 +51,6 @@ export class AddCourseComponent implements OnInit
 
   ngOnInit() 
   {
-
     this.courseForm = this.fb.group({
       title: ['', Validators.required],
       short_desc: [''],
@@ -157,38 +164,46 @@ export class AddCourseComponent implements OnInit
     // console.log(course_url);
     // console.log(desc);
     // return;
-    // if(title === '')
-    // {
-      //   console.log('no title')
-      // }
-      // else if(short_desc === '')
+     if (title.length === 0)
+     {
+        //console.log('no title');
+        this.categoryError="";
+        this.titleError="Please enter Title";
+      }
+      // else if(short_desc.length === 0)
       // {
-        //   console.log('no short desc')
-        // }
-        // else if(category === '0')
-        // {
-          //   console.log('no category')
-    // }
-    // else if(level === '0')
-    // {
-      //   console.log('no level')
+      //   //console.log('no short desc');
       // }
-      // else if(language === '0')
-      // {
-        //   console.log('no language')
-        // }
-        // else if(course_provider === '0')
-        // {
-          //   console.log('no course provider')
-          // }
-          // else if(course_url === '')
-          // {
-            //   console.log('no course url')
-            // }
-            // else if(desc === null)
-            // {
-              //   console.log('no desc')
-              // }
+      else if(sub_category_id === '0')
+        {
+      //console.log('no category');
+      this.titleError='';
+      this.categoryError="Please select category"
+       }
+    //  else if(level === '0')
+    //  {
+    //    //console.log('no level');
+    //    this.
+    //    this.levelError="Please select level";
+    //  }
+    //  else if(language === '0')
+    //  {
+       //console.log('no language');
+    //    this.languageError="Please select language"
+    //  }
+  //    else if(course_provider === '0')
+  //    {
+  //      //console.log('no course provider');
+  //    }
+  //    else if(course_url === '')
+  //  {
+  //    console.log('no course url')
+  //  }
+    //  else if(desc === null)
+    //  {
+       //console.log('no desc');
+    //    this.editorError="Please enter descrption"
+    //  }
               
               formData.append('title', title);
               formData.append('outcomes', outcomes);
@@ -213,9 +228,9 @@ export class AddCourseComponent implements OnInit
       formData.append('video_upload',  this.courseForm.get('video_upload').value);
     }
     
-    
     this.courseService.create(formData).subscribe((data) => {
-      
+      this.isLoad = 1;      
+
       console.log(data);
       if (data.status === '400') 
       {
@@ -226,9 +241,7 @@ export class AddCourseComponent implements OnInit
         this.router.navigate(['/trainer/course/']);
       }
       
-      
     });
-
   }
 
   ckeditor_data(event)
@@ -255,5 +268,6 @@ export class AddCourseComponent implements OnInit
       this.course_url = '1';
       this.video_uploader = '0';
     }
+
   }
 }
