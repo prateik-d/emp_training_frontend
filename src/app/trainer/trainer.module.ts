@@ -19,6 +19,7 @@ import { AddCourseComponent } from './courses/add-course/add-course.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
 import { EditLessonsComponent } from './courses/edit-lessons/edit-lessons.component';
 import { AddLessonComponent } from './courses/add-lesson/add-lesson.component';
+import { UsersComponent } from './users/users.component';
 
 import { ReplaceUnderscorePipe } from '../replace-underscore.pipe';
 
@@ -44,7 +45,8 @@ import { DataTablesModule } from 'angular-datatables';
     EditCourseComponent, 
     EditLessonsComponent, 
     AddLessonComponent,
-    ReplaceUnderscorePipe
+    ReplaceUnderscorePipe,
+    UsersComponent
 
   ],
   imports: [
