@@ -1,0 +1,58 @@
+<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+    <app-header></app-header>
+    <div class="page-wrapper">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-7 align-self-center">
+                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Table Name</h4> </div>
+                <div class="col-5 align-self-center">
+                    <div class="customize-input float-right">
+                        <a href="form.html" class="btn waves-effect waves-light btn-primary">Add Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table datatable class="table table-striped table-bordered display no-wrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Joining date</th>
+                                            <th class="no-sort">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let user of users; let i = index">
+                                            <td>{{i + 1}}</td>
+                                            <td>{{user.first_name +' '+ user.last_name | titlecase }}</td>
+                                            <td>{{user.designation_name}}</td>
+                                            <td>{{user.date_of_joining}}</td>
+                                            <td class="action">
+                                                <a [routerLink]="['/']" routerLinkActive="router-link-active" class="btn btn-primary mr-2" title="Add as an User">
+                                                    <i class="fas fa-user"></i>
+                                                    Add as an User
+                                                </a>
+                                                <a [routerLink]="['/']" routerLinkActive="router-link-active" class="btn btn-secondary" title="Add as a Supervisor">
+                                                    <i class="fas fa-user-plus"></i>
+                                                    Add as a Supervisor
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

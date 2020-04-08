@@ -15,12 +15,10 @@ import { AddCourseComponent } from './trainer/courses/add-course/add-course.comp
 import { EditCourseComponent } from './trainer/courses/edit-course/edit-course.component';
 import { EditLessonsComponent } from './trainer/courses/edit-lessons/edit-lessons.component';
 import { AddLessonComponent } from './trainer/courses/add-lesson/add-lesson.component';
-
+import { UsersComponent } from './trainer/users/users.component';
 
 
 import { InvalidComponent } from './invalid/invalid.component';
-
-
 
 
 const routes: Routes = [
@@ -39,6 +37,8 @@ const routes: Routes = [
   { path : 'trainer/course/edit/:id', component:EditCourseComponent },
   { path : 'trainer/course/edit-lesson/:id', component:EditLessonsComponent },
   { path : 'trainer/course/add-lesson/:id', component:AddLessonComponent },
+  
+  { path : 'trainer/users', component:UsersComponent },
 
   { path: '', component:HomeComponent },
   { path : '**', component:InvalidComponent }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { CategoryService } from 'src/app/shares/trainer/category.service';
 import { CourseService } from 'src/app/shares/trainer/course.service';
 import { Subject } from 'rxjs';
 
