@@ -231,14 +231,14 @@ export class AddCourseComponent implements OnInit
       this.isLoad = 1;      
 
       console.log(data);
-      if (data.status === '400') 
-      {
-        this.courseError = 'something went wrong...';
-      } 
-      else 
-      {
-        this.router.navigate(['/trainer/course/']);
-      }
+      // if (data.status === '400') 
+      // {
+      //   this.courseError = 'something went wrong...';
+      // } 
+      // else 
+      // {
+      //   this.router.navigate(['/trainer/course/']);
+      // }
       
     });
   }
