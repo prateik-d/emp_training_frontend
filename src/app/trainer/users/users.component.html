@@ -36,15 +36,79 @@
                                             <td>{{user.designation_name}}</td>
                                             <td>{{user.date_of_joining}}</td>
                                             <td class="action">
-                                                <a [routerLink]="['/']" routerLinkActive="router-link-active" class="btn btn-primary mr-2" title="Add as an User">
+                                                <a 
+                                                    href="javascript:void:(0)"  
+                                                    class="btn btn-primary mr-2" 
+                                                    title="Add as an User"
+                                                    data-toggle="modal"  
+													[attr.data-target]="'#add_user_' + user.user_id"
+                                                    >
                                                     <i class="fas fa-user"></i>
                                                     Add as an User
                                                 </a>
-                                                <a [routerLink]="['/']" routerLinkActive="router-link-active" class="btn btn-secondary" title="Add as a Supervisor">
+                                                <a 
+                                                    href="javascript:void:(0)" 
+                                                    class="btn btn-secondary" 
+                                                    title="Add as a Supervisor"
+                                                    data-toggle="modal"  
+													[attr.data-target]="'#add_supervisor_' + user.user_id"
+                                                    >
                                                     <i class="fas fa-user-plus"></i>
                                                     Add as a Supervisor
                                                 </a>
                                             </td>
+
+
+                                            <!-- Add User-->
+                                            <div class="modal fade" id="add_user_{{user.user_id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete ?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="POST" (click)="add_user(user.user_id)">
+                                                            
+                                                                <div class="form-group">
+                                                                    <input type="text" name="id" value="{{user.user_id}}">
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary mr-3">Delete</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Add Supervisor-->
+                                            <div class="modal fade" id="add_supervisor_{{user.user_id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete ?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="POST" (click)="add_supervisor(user.user_id)">
+                                                            
+                                                                <div class="form-group">
+                                                                    <input type="text" name="id" value="{{user.user_id}}">
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary mr-3">Supervisor</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
                                         </tr>
                                     </tbody>
                                 </table>

@@ -26,6 +26,22 @@ export class HrmsUserService {
 
   
 
+  get_user_details(user_id)
+  {
+    return this.http.get<any>('http://qitstaging.com/hrsale/index.php/api/auth/userinfo?user_id=' + user_id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  add_user(data)
+  {
+    return this.http.post<any>(this.serverUrl + 'api/trainer/userhrms/add_user', data)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
