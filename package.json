@@ -22,7 +22,7 @@
     "angular-data-table": "^0.8.1",
     "angular-datatables": "^8.0.0",
     "ckeditor4-angular": "^1.1.0",
-    "datatables.net": "^1.10.20",
+    "datatables.net": "^1.11.3",
     "datatables.net-dt": "^1.10.20",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
